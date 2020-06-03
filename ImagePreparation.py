@@ -26,15 +26,15 @@ class ImagePreparation:
                 self.images[i] = item.transpose(ROTATE_90)
 
     def correct_rescale(self):
-        min_width = self.images[0].width
+        min_height = self.images[0].height
         for item in self.images:
             item.thumbnail((self.needed_size[0], self.needed_size[1]))
-            if item.width < min_width:
-                min_width = item.width
+            if item.height < min_height:
+                min_height = item.height
 
-        print("MIN WIDTH",min_width)
+        print("MIN WIDTH",min_height)
         for index, item in enumerate(self.images):
-            self.images[index] = item.crop((0, 0, min_width, self.needed_size[1]))
+            self.images[index] = item.crop((0, 0, self.needed_size[1], min_height))
 
     @staticmethod
     def concat_horizontally(images_to_concat):
