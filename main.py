@@ -45,11 +45,11 @@ def main():
         return 2
 
     colors_getter = ColorsGetter(img)
-    kmeans = colors_getter.get_kmeans_colors(10)
+    # kmeans = colors_getter.get_kmeans_colors(10)
     # average = colors_getter.get_average_color()
-    # most_freq = colors_getter.get_most_freq_colors(40)
+    most_freq = colors_getter.get_most_freq_colors(40)
 
-    show_image_with_colors(img, kmeans, True, "out_images/st_kmeans.png")
+    show_image_with_colors(img, most_freq, True, "out_images/most_freq1.png")
     return 0
 
 
