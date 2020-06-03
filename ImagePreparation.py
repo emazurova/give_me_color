@@ -15,10 +15,8 @@ class ImagePreparation:
         if len(self.images_path) == 0:
             raise ValueError("There are no images to open")
 
-        images = list()
         for path in self.images_path:
-            images.append(open(path))
-        return images
+            self.images.append(open(path))
 
     def make_rotation(self):
         for i, item in enumerate(self.images):
@@ -32,7 +30,6 @@ class ImagePreparation:
             if item.height < min_height:
                 min_height = item.height
 
-        print("MIN WIDTH",min_height)
         for index, item in enumerate(self.images):
             self.images[index] = item.crop((0, 0, self.needed_size[1], min_height))
 
@@ -52,12 +49,14 @@ class ImagePreparation:
         h = images_to_concat[0].height * len(images_to_concat)
         w = images_to_concat[0].width
         img = new('RGB', (w, h))
+
         for index, item in enumerate(images_to_concat):
             img.paste(item, (0, item.height * index))
+
         return img
 
     def prepare(self):
-        self.images = self.open_images()
+        self.open_images()
         self.make_rotation()
         self.correct_rescale()
         img_1 = self.concat_horizontally(self.images[:3])
