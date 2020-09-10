@@ -1,4 +1,5 @@
 from PIL.Image import new, open, ROTATE_90
+from io import BytesIO
 
 
 class ImagePreparation:
@@ -16,7 +17,7 @@ class ImagePreparation:
             raise ValueError("There are no images to open")
 
         for path in self.images_path:
-            self.images.append(open(path))
+            self.images.append(open(BytesIO(path)))
 
     def make_rotation(self):
         for i, item in enumerate(self.images):
